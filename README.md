@@ -41,10 +41,10 @@ A pelvis-drift safety cutoff freezes the IK if arm motion begins to destabilize 
 
 ## What this project demonstrates
 
-- **Robot description authoring** — modified MJCF (MuJoCo XML) to add an industrial payload pack, head-mounted sensor pod, and tool-tip end-effector site to a Unitree G1 base model
-- **Joint-space PD control** — used MuJoCo's built-in PD on a hand-tuned standing keyframe; characterized the passive recovery region under randomized disturbances
-- **Damped Least Squares IK** — implemented Jacobian-based IK from scratch using `mj_jacSite`, including damping for singularity robustness, integration on the actual joint state to avoid command-vs-actual lag, and clipping to joint limits
-- **System debugging** — diagnosed and fixed cascading failure modes including arm/base dynamic coupling, payload-induced CoM shifts, and Jacobian linearization errors at far targets
+- **Robot description authoring** modified MJCF (MuJoCo XML) to add an industrial payload pack, head-mounted sensor pod, and tool-tip end-effector site to a Unitree G1 base model
+- **Joint-space PD control** used MuJoCo's built-in PD on a hand-tuned standing keyframe; characterized the passive recovery region under randomized disturbances
+- **Damped Least Squares IK** implemented Jacobian-based IK from scratch using `mj_jacSite`, including damping for singularity robustness, integration on the actual joint state to avoid command-vs-actual lag, and clipping to joint limits
+- **System debugging** diagnosed and fixed cascading failure modes including arm/base dynamic coupling, payload-induced CoM shifts, and Jacobian linearization errors at far targets
 
 ---
 
