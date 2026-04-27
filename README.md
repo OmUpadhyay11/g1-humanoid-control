@@ -2,7 +2,7 @@
 
 **29-DOF Unitree G1 humanoid simulation in MuJoCo** with joint-space PD balance control and Damped Least Squares Jacobian inverse kinematics. Configured for an industrial inspection application with a sensor pod and payload pack.
 
-> Built as a controls/sim portfolio project to demonstrate working knowledge of humanoid platform configuration, classical balance control, and redundant-arm IK — the foundational toolkit underneath modern RL-based humanoid pipelines.
+> Built as a controls/sim portfolio project to demonstrate working knowledge of humanoid platform configuration, classical balance control, and redundant-arm IK, the foundational toolkit underneath modern RL-based humanoid pipelines.
 
 ---
 
@@ -35,7 +35,7 @@ The right arm's tool-tip end-effector tracks a 3D Cartesian target (vertical cir
 | Pelvis drift induced by arm motion | < 1 cm |
 | Continuous tracking duration tested | 13+ s |
 
-A pelvis-drift safety cutoff freezes the IK if arm motion begins to destabilize the base — a defensive layer learned from observing arm/base coupling failures during tuning.
+A pelvis-drift safety cutoff freezes the IK if arm motion begins to destabilize the base, a defensive layer learned from observing arm/base coupling failures during tuning.
 
 ---
 
@@ -89,20 +89,20 @@ python ik_demo.py    # right arm IK tracking a moving target
 
 **Why hand-tuned PD instead of RL?** Modern humanoid pipelines (Figure, Apptronik, etc.) train walking policies via RL in Isaac Lab and deploy via sim-to-real transfer. RL is the right choice for dynamic locomotion. For *static stabilization* and *manipulation IK*, classical control is faster, easier to debug, and is the layer that actually runs underneath learned policies on real robots.
 
-**Why DLS instead of analytical IK?** The G1 arm is 7-DOF (redundant — more joints than the 3 task-space dimensions), so analytical IK requires picking a parameterization for the null space (e.g., elbow elevation). DLS sidesteps this by solving numerically and naturally exploits redundancy via the pseudo-inverse. It's also the same family of methods used in industrial-arm controllers including the ABB IRC5.
+**Why DLS instead of analytical IK?** The G1 arm is 7-DOF (redundant, more joints than the 3 task-space dimensions), so analytical IK requires picking a parameterization for the null space (e.g., elbow elevation). DLS sidesteps this by solving numerically and naturally exploits redundancy via the pseudo-inverse. It's also the same family of methods used in industrial-arm controllers including the ABB IRC5.
 
-**Coupling between arm and base.** A floating-base humanoid couples arm and base dynamics — fast arm motions push the base around (Newton's third law on a free-floating system). Tuning the IK gains required balancing target tracking against base disturbance. The pelvis-drift cutoff in `ik_demo.py` is a defensive backstop discovered through this tuning.
+**Coupling between arm and base.** A floating-base humanoid couples arm and base dynamics, fast arm motions push the base around (Newton's third law on a free-floating system). Tuning the IK gains required balancing target tracking against base disturbance. The pelvis-drift cutoff in `ik_demo.py` is a defensive backstop discovered through this tuning.
 
 ---
 
 ## Future work
 
-- **Active ankle strategy** — add a torso-tilt feedback term to the ankle pitch/roll commands to extend the backward stability margin
-- **Whole-body coordination** — let the waist and pelvis contribute to IK targets instead of holding them at the standing setpoint
-- **RL walking policy** — port the model to Isaac Lab and train a PPO walking controller using domain randomization, then validate sim-to-sim back in MuJoCo
+- **Active ankle strategy** add a torso-tilt feedback term to the ankle pitch/roll commands to extend the backward stability margin
+- **Whole-body coordination** let the waist and pelvis contribute to IK targets instead of holding them at the standing setpoint
+- **RL walking policy** port the model to Isaac Lab and train a PPO walking controller using domain randomization, then validate sim-to-sim back in MuJoCo
 
 ---
 
 ## Acknowledgments
 
-Base humanoid model from [DeepMind's MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) — Unitree G1 (29-DOF revision).
+Base humanoid model from [DeepMind's MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie) | Unitree G1 (29-DOF revision).
