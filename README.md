@@ -6,7 +6,6 @@
 
 ---
 
-## Demos
 
 ### Balance under disturbance
 The robot holds a hand-tuned standing pose via joint-space PD on MuJoCo's `<position>` actuators, while randomized 30 N impulse forces are applied at the torso every 6 seconds.
